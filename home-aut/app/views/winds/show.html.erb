@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Speed:</strong>
+  <%= @wind.speed %>
+</p>
+
+<p>
+  <strong>Dir:</strong>
+  <%= @wind.dir %>
+</p>
+
+<%= link_to 'Edit', edit_wind_path(@wind) %> |
+<%= link_to 'Back', winds_path %>

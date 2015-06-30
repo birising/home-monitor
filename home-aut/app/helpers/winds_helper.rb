@@ -1,0 +1,2 @@
+module WindsHelper
+end

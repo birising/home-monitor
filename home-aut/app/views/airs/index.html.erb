@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Airs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Pressure</th>
+      <th>Time measurement</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @airs.each do |air| %>
+      <tr>
+        <td><%= air.temperature %></td>
+        <td><%= air.humidity %></td>
+        <td><%= air.pressure %></td>
+        <td><%= air.time_measurement %></td>
+        <td><%= link_to 'Show', air %></td>
+        <td><%= link_to 'Edit', edit_air_path(air) %></td>
+        <td><%= link_to 'Destroy', air, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Air', new_air_path %>

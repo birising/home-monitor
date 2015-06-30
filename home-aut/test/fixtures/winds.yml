@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  speed: 1.5
+  dir: 1
+
+two:
+  speed: 1.5
+  dir: 1

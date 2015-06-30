@@ -1,0 +1,33 @@
+<%= form_for(@air) do |f| %>
+  <% if @air.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@air.errors.count, "error") %> prohibited this air from being saved:</h2>
+
+      <ul>
+      <% @air.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :temperature %><br>
+    <%= f.text_field :temperature %>
+  </div>
+  <div class="field">
+    <%= f.label :humidity %><br>
+    <%= f.text_field :humidity %>
+  </div>
+  <div class="field">
+    <%= f.label :pressure %><br>
+    <%= f.text_field :pressure %>
+  </div>
+  <div class="field">
+    <%= f.label :time_measurement %><br>
+    <%= f.date_select :time_measurement %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

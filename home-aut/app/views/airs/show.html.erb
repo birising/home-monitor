@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Temperature:</strong>
+  <%= @air.temperature %>
+</p>
+
+<p>
+  <strong>Humidity:</strong>
+  <%= @air.humidity %>
+</p>
+
+<p>
+  <strong>Pressure:</strong>
+  <%= @air.pressure %>
+</p>
+
+<p>
+  <strong>Time measurement:</strong>
+  <%= @air.time_measurement %>
+</p>
+
+<%= link_to 'Edit', edit_air_path(@air) %> |
+<%= link_to 'Back', airs_path %>
