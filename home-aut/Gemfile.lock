@@ -168,6 +168,7 @@ DEPENDENCIES
   curb
   jbuilder (~> 2.0)
   jquery-rails
+  json
   lazy_high_charts
   pg
   rails (= 4.2.0)
