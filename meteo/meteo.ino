@@ -147,12 +147,10 @@ void setup()
 
 void loop()
 {
-  wdt_reset(); //Pet the dog
-
-
+ 
   EthernetClient client = server.available();
   if (client) {
-    Serial.println("new client");
+
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
     while (client.connected()) {
@@ -163,7 +161,7 @@ void loop()
         // character) and the line is blank, the http request has ended,
         // so you can send a reply
         if (c == '\n' && currentLineIsBlank) {
-          calcWeather();
+         
           
           // send a standard http response header
           client.println("HTTP/1.1 200 OK");
@@ -175,9 +173,9 @@ void loop()
           client.print(get_wind_speed());
           client.print(",\"dir\": ");
           client.print(get_wind_direction());
-          client.print("},\"rain\": {\"total_rain\":");
+          client.print("},\"rain\": {\"total\":");
           client.print(get_rain());
-          client.print("},\"air_parameters\": {\"air_pressure\": ");
+          client.print("},\"parameters\": {\"pressure\": ");
           client.print(24);
           client.print(", \"humidity\": ");
           client.print(get_humidity());
