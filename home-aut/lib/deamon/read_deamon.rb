@@ -42,18 +42,18 @@ require '/Users/Honza/Documents/PROGRAMING/PRIVATE/home-monitor/home-aut/config/
 class Test 
 
   def run 
-    print "ahoj\n"
+
 
     http = Curl.get("192.168.88.250")
-    puts http.header_str[0]
 
-  str = "{\"wind\": {\"speed\": 0.00,\"dir\": 315},\"rain\": {\"total\":1.12},\"air\": {\"pressure\": 24, \"humidity\": 58.60,\"temperature\": 21.60},\"lightning\": { \"distance\": \"\"}}"
 
-  parsed = JSON.parse(str)
+  puts http.body_str
+
+  parsed = JSON.parse(http.body_str)
 puts "<<<AIR>>>>"
-puts parsed["air"]["temperature"]
-puts parsed["air"]["humidity"]
-puts parsed["air"]["pressure"]
+puts parsed["parameters"]["temperature"]
+puts parsed["parameters"]["humidity"]
+puts parsed["parameters"]["pressure"]
 puts "<<<WIND>>>>"
 puts parsed["wind"]["speed"]
 puts parsed["wind"]["dir"]
@@ -62,9 +62,9 @@ puts parsed["rain"]["total"]
 
 
     alert = Air.new do |a| 
-    a.temperature = parsed["air"]["temperature"]
-    a.humidity = parsed["air"]["humidity"]
-    a.pressure = parsed["air"]["pressure"]
+    a.temperature = parsed["parameters"]["temperature"]
+    a.humidity = parsed["parameters"]["humidity"]
+    a.pressure = parsed["parameters"]["pressure"]
     end
     alert.save
 
