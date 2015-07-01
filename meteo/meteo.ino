@@ -175,7 +175,7 @@ void loop()
           client.print(get_wind_direction());
           client.print("},\"rain\": {\"total\":");
           client.print(get_rain());
-          client.print("},\"parameters\": {\"pressure\": ");
+          client.print("},\"air\": {\"pressure\": ");
           client.print(24);
           client.print(", \"humidity\": ");
           client.print(get_humidity());
