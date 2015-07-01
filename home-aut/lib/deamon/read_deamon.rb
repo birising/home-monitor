@@ -51,9 +51,9 @@ class Test
 
   parsed = JSON.parse(http.body_str)
 puts "<<<AIR>>>>"
-puts parsed["parameters"]["temperature"]
-puts parsed["parameters"]["humidity"]
-puts parsed["parameters"]["pressure"]
+puts parsed["air"]["temperature"]
+puts parsed["air"]["humidity"]
+puts parsed["air"]["pressure"]
 puts "<<<WIND>>>>"
 puts parsed["wind"]["speed"]
 puts parsed["wind"]["dir"]
@@ -62,9 +62,9 @@ puts parsed["rain"]["total"]
 
 
     alert = Air.new do |a| 
-    a.temperature = parsed["parameters"]["temperature"]
-    a.humidity = parsed["parameters"]["humidity"]
-    a.pressure = parsed["parameters"]["pressure"]
+    a.temperature = parsed["air"]["temperature"]
+    a.humidity = parsed["air"]["humidity"]
+    a.pressure = parsed["air"]["pressure"]
     end
     alert.save
 

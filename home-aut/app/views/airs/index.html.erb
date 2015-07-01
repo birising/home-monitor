@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Airs</h1>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+
+<%= line_chart get_data_for_temperature_graph() , { library: {hAxis: {title: "Time"}, vAxis: {title: "°C"} ,curveType: "none", pointSize: 0}} %>
+
 
 <table>
+
   <thead>
     <tr>
       <th>Temperature</th>
       <th>Humidity</th>
       <th>Pressure</th>
-      <th>Time measurement</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +24,6 @@
         <td><%= air.temperature %></td>
         <td><%= air.humidity %></td>
         <td><%= air.pressure %></td>
-        <td><%= air.time_measurement %></td>
         <td><%= link_to 'Show', air %></td>
         <td><%= link_to 'Edit', edit_air_path(air) %></td>
         <td><%= link_to 'Destroy', air, method: :delete, data: { confirm: 'Are you sure?' } %></td>
