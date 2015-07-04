@@ -5,7 +5,48 @@ class AirsController < ApplicationController
   # GET /airs.json
   def index
     @airs = Air.all
+    def index
+  @h = LazyHighCharts::HighChart.new('pie') do |f|
+  f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
+  series = {
+    :type=> 'pie',
+    :name=> 'Browser share',
+    :data=> [
+      ['Firefox', 45.0],
+      ['IE', 26.8],
+     {
+        :name=> 'Chrome', 
+        :y=> 12.8,
+        :sliced=> true,
+        :selected=> true
+     },
+      ['Safari', 8.5],
+      ['Opera', 6.2],
+      ['Others', 0.7]
+    ]
+  }
+  f.series(series)
+  f.options[:title][:text] = "THA PIE"
+  f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+  f.plot_options(:pie=>{
+    :allowPointSelect=>true, 
+    :cursor=>"pointer" , 
+    :dataLabels=>{
+      :enabled=>true,
+      :color=>"black",
+      :style=>{
+        :font=>"13px Trebuchet MS, Verdana, sans-serif"
+      }
+    }
+  })
+ end
+end
   end
+
+
+
+
+
 
   # GET /airs/1
   # GET /airs/1.json
@@ -69,6 +110,6 @@ class AirsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def air_params
-      params.require(:air).permit(:temperature, :humidity, :pressure, :time_measurement)
+      params.require(:air).permit(:temperature, :humidity, :pressure)
     end
 end
