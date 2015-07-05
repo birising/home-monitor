@@ -7,13 +7,13 @@ class AirsController < ApplicationController
   # GET /airs.json
   def index
     @airs = Air.all
-    def index
+
 
 raturn_value = []
 data  = []
     Air.all.where("created_at > ?", 1.days.ago).each do |aquarium|
       raturn_value.push (aquarium.temperature)
-      data.push([aquarium.created_at.to_date.to_datetime.to_i*1000,aquarium.temperature])
+      data.push([aquarium.created_at.to_date.to_datetime.to_i,aquarium.temperature])
     end
     @startdate = Air.first.created_at
 
@@ -24,7 +24,7 @@ data  = []
 
   @h = LazyHighCharts::HighChart.new('graph') do |f|
     f.options[:title][:text] = "Temperature"
-    f.options[:chart][:defaultSeriesType] = "area"
+    f.options[:chart][:defaultSeriesType] = "line"
     f.options[:chart][:inverted] = false
     f.options[:chart][:zoomType] = 'x'
     f.options[:legend][:layout] = "horizontal"
@@ -33,8 +33,67 @@ data  = []
     f.options[:yAxis][:labels][:format] = '{value} °C'
     f.series(  :name => "Temperature", :color => "#2cc9c5", :data => data)
     f.options[:xAxis] = {:minTickInterval => 1, :type => "datetime", :dateTimeLabelFormats => { day: "%b %e"}, :data =>data}
-  end
+
 end
+
+
+raturn_value = []
+data  = []
+    Air.all.where("created_at > ?", 1.days.ago).each do |aquarium|
+      raturn_value.push (aquarium.temperature)
+      data.push([aquarium.created_at.to_date.to_datetime.to_i,aquarium.humidity])
+    end
+    @startdate = Air.first.created_at
+
+
+
+
+@count = Air.all.count
+
+  @a = LazyHighCharts::HighChart.new('graph') do |f|
+    f.options[:title][:text] = "Humidity"
+    f.options[:chart][:defaultSeriesType] = "line"
+    f.options[:chart][:inverted] = false
+    f.options[:chart][:zoomType] = 'x'
+    f.options[:legend][:layout] = "horizontal"
+    f.options[:legend][:borderWidth] = "0"
+    f.options[:yAxis][:title][:text] = @startdate.to_date.to_datetime.to_i
+    f.options[:yAxis][:labels][:format] = '{value} %'
+    f.series(  :name => "Humidity", :color => "#2cc9c5", :data => data)
+    f.options[:xAxis] = {:minTickInterval => 1, :type => "datetime", :dateTimeLabelFormats => { day: "%b %e"}, :data =>data}
+
+end
+
+
+
+
+raturn_value = []
+data  = []
+    Wind.all.where("created_at > ?", 1.days.ago).each do |aquarium|
+
+      data.push([aquarium.created_at.to_date.to_datetime.to_i,aquarium.speed])
+    end
+    @startdate = Air.first.created_at
+
+
+
+
+@count = Air.all.count
+
+  @speed = LazyHighCharts::HighChart.new('graph') do |f|
+    f.options[:title][:text] = "Speed"
+    f.options[:chart][:defaultSeriesType] = "line"
+    f.options[:chart][:inverted] = false
+    f.options[:chart][:zoomType] = 'x'
+    f.options[:legend][:layout] = "horizontal"
+    f.options[:legend][:borderWidth] = "0"
+    f.options[:yAxis][:title][:text] = @startdate.to_date.to_datetime.to_i
+    f.options[:yAxis][:labels][:format] = '{value} m/s'
+    f.series(  :name => "Speed", :color => "#2cc9c5", :data => data)
+    f.options[:xAxis] = {:minTickInterval => 1, :type => "datetime", :dateTimeLabelFormats => { day: "%b %e"}, :data =>data}
+
+end
+
   end
 
 
