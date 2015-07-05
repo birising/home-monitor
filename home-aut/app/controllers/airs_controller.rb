@@ -1,3 +1,5 @@
+
+
 class AirsController < ApplicationController
   before_action :set_air, only: [:show, :edit, :update, :destroy]
 
@@ -11,7 +13,7 @@ raturn_value = []
 data  = []
     Air.all.where("created_at > ?", 1.days.ago).each do |aquarium|
       raturn_value.push (aquarium.temperature)
-      data.push([aquarium.created_at.to_i,aquarium.temperature])
+      data.push([aquarium.created_at.to_date.to_datetime.to_i*1000,aquarium.temperature])
     end
     @startdate = Air.first.created_at
 
@@ -27,7 +29,7 @@ data  = []
     f.options[:chart][:zoomType] = 'x'
     f.options[:legend][:layout] = "horizontal"
     f.options[:legend][:borderWidth] = "0"
-    f.options[:yAxis][:title][:text] = "Temperature"
+    f.options[:yAxis][:title][:text] = @startdate.to_date.to_datetime.to_i
     f.options[:yAxis][:labels][:format] = '{value} °C'
     f.series(  :name => "Temperature", :color => "#2cc9c5", :data => data)
     f.options[:xAxis] = {:minTickInterval => 1, :type => "datetime", :dateTimeLabelFormats => { day: "%b %e"}, :data =>data}
