@@ -68,6 +68,14 @@ puts parsed["rain"]["total"]
     end
     alert.save
 
+alert = Wind.new do |a| 
+    a.speed = parsed["wind"]["speed"]
+    a.dir = parsed["wind"]["dir"]
+
+    end
+    alert.save
+
+puts "------ALL SAVED--------"
 
 
 
