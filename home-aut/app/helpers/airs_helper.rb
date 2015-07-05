@@ -16,7 +16,7 @@ module AirsHelper
 
 def get_data_for_humidity_graph
 		raturn_value = {}
-		Air.all.where("created_at > ?", 30.minutes.ago).each do |aquarium|
+		Air.all.where("created_at > ?", 1.days.ago).each do |aquarium|
 		  raturn_value[aquarium.created_at] = aquarium.humidity
 		end
 		raturn_value
@@ -44,11 +44,7 @@ def get_data_for_humidity_graph
 	end
 
 
-def get_date 
 
-
-
-end
 
 
 

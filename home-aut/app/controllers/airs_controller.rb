@@ -6,40 +6,32 @@ class AirsController < ApplicationController
   def index
     @airs = Air.all
     def index
-  @h = LazyHighCharts::HighChart.new('pie') do |f|
-  f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
-  series = {
-    :type=> 'pie',
-    :name=> 'Browser share',
-    :data=> [
-      ['Firefox', 45.0],
-      ['IE', 26.8],
-     {
-        :name=> 'Chrome', 
-        :y=> 12.8,
-        :sliced=> true,
-        :selected=> true
-     },
-      ['Safari', 8.5],
-      ['Opera', 6.2],
-      ['Others', 0.7]
-    ]
-  }
-  f.series(series)
-  f.options[:title][:text] = "THA PIE"
-  f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
-  f.plot_options(:pie=>{
-    :allowPointSelect=>true, 
-    :cursor=>"pointer" , 
-    :dataLabels=>{
-      :enabled=>true,
-      :color=>"black",
-      :style=>{
-        :font=>"13px Trebuchet MS, Verdana, sans-serif"
-      }
-    }
-  })
- end
+
+raturn_value = []
+data  = []
+    Air.all.where("created_at > ?", 1.days.ago).each do |aquarium|
+      raturn_value.push (aquarium.temperature)
+      data.push([aquarium.created_at.to_i,aquarium.temperature])
+    end
+    @startdate = Air.first.created_at
+
+
+
+
+@count = Air.all.count
+
+  @h = LazyHighCharts::HighChart.new('graph') do |f|
+    f.options[:title][:text] = "Temperature"
+    f.options[:chart][:defaultSeriesType] = "area"
+    f.options[:chart][:inverted] = false
+    f.options[:chart][:zoomType] = 'x'
+    f.options[:legend][:layout] = "horizontal"
+    f.options[:legend][:borderWidth] = "0"
+    f.options[:yAxis][:title][:text] = "Temperature"
+    f.options[:yAxis][:labels][:format] = '{value} °C'
+    f.series(  :name => "Temperature", :color => "#2cc9c5", :data => data)
+    f.options[:xAxis] = {:minTickInterval => 1, :type => "datetime", :dateTimeLabelFormats => { day: "%b %e"}, :data =>data}
+  end
 end
   end
 
