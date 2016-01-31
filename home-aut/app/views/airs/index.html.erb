@@ -1,12 +1,36 @@
 <p id="notice"><%= notice %></p>
 
+<%= simple_format @countAirs.to_yaml %>
+<h1>Listing Airs-v2</h1>
 
-<h1>Listing Airs</h1>
+<table>                         
+  <tr>                          
+    <th>field1</th>
+    <th>field2</th>
+  </tr>
+<% @dataA.each do |data| %>   
+  <tr>
+    <td><%= data.first %></td>
+    <td><%= data.second %></td> 
+  </tr>
+<% end %>                       
+</table>
+
+
+
+
 
 
 <%= javascript_include_tag 'highcharts' %>
 <%= high_chart("my_id", @h) %>
+
+
+ <%= high_chart("my_id4", @h) do |c| %>
+ <%= raw "options.tooltip.formatter = function() {return  this.y +' %'+this.point.name;}"  %>
+      <% end %>
+
+
 <%= high_chart("my_id2", @a) %>
-<%= high_chart("speed", @speed) %>
+<!-- <%= high_chart("speed", @speed) %>-->
 
 
